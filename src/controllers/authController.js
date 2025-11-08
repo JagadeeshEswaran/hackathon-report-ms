@@ -34,11 +34,11 @@ export const signup = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
-        if (!email || !password) return res.status(400).json({ message: 'email and password are required' });
+        const { email, password, type } = req.body;
+        if (!email || !password || !type) return res.status(400).json({ message: 'email, password and type are required' });
 
 
-        const user = await User.findOne({ email, isActive: true }).select('+password');
+        const user = await User.findOne({ email, type, isActive: true }).select('+password');
         if (!user) return res.status(401).json({ message: 'Invalid credentials' });
 
 
@@ -47,7 +47,7 @@ export const login = async (req, res) => {
 
 
         user.last_login = new Date();
-        await user.save({ validateBeforeSave: false });
+        await user.save();
 
 
         const token = signToken(user);
