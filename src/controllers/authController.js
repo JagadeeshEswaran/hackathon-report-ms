@@ -21,6 +21,7 @@ export const signup = async (req, res) => {
 
         const user = await User.create({ userName, email, password, type });
         const token = signToken(user);
+        req.session=token;
         res.status(201).json({
             token,
             user: { id: user._id, userName: user.userName, email: user.email, type: user.type }
