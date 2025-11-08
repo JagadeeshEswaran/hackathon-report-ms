@@ -51,6 +51,7 @@ export const login = async (req, res) => {
 
 
         const token = signToken(user);
+        req.session=token;  
         res.json({
             token,
             user: { id: user._id, userName: user.userName, email: user.email, type: user.type, last_login: user.last_login }
