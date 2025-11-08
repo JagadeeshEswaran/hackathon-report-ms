@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 
-const USER_TYPES = ['patient', 'provider', 'admin'];
+const USER_TYPES = ['patient', 'provider'];
 
 
 const userSchema = new mongoose.Schema(
