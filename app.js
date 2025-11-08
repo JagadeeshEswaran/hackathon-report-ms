@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const CORS = require("cors");
 const dotenv = require("dotenv");
 
@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const errorHandler = require("./src/utils/errorHandler");
 const ApiError = require("./src/utils/ApiError");
 const { default: mongoose } = require("mongoose");
+const router_v1 = require("./src/V1/routes");
 
 dotenv.config({
   path: process.env.NODE_ENV === "DEV" ? ".env.dev" : ".env.prod",
@@ -27,12 +28,8 @@ mongoose
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ Mongo error:", err));
 
-// app.use("/api/v1", v1_router);
-
-// app.use("*", (req, res, next) => {
-// 	next(new ApiError(404, "Route Not Found..."));
-// });
+app.use("/api/v1", router_v1);
 
 app.use(errorHandler);
 
-module.exports = app;
+export default app;
