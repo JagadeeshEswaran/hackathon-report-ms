@@ -7,6 +7,7 @@ import authRoutes from "./routes/authRoutes.js";
 import ProvidersRoute from "./routes/providerRoutes.js";
 import AdminRoutes from "./routes/adminRoutes.js";
 import bodyParser from "body-parser";
+import UserRoutes from "./routes/userRoutes.js";
 
 // require('dotenv').config();
 const app = express();
@@ -22,6 +23,7 @@ app.get("/api/test", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/user", UserRoutes);
 app.use("/api/provdr", ProvidersRoute);
 app.use("/api/admin", AdminRoutes);
 app.get("/health", (_req, res) => res.json({ ok: true }));
